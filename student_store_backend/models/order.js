@@ -1,67 +1,60 @@
 const db = require("../db");
+const { BadRequestError } = require("../utils/errors");
 
 class Order {
-  static async listOrdersForUser() {
-    const ordersResult = await db.query(
+  static async createOrder({ order, user }) {
+    //Take a user's order and store in database
+
+    const result = await db.query(
       `
-
-      SELECT (
-        id AS "orderId",
-        customer_id AS "customerId",
-        quantity AS "quantity",
-        name AS "name",
-        price AS "price"
-      )
-      FROM orders
-        JOIN order_details ON orders.id = order_details.order_id
-        JOIN products ON products.id = order_details.product_id
-      
-      WHERE customerId = (
-        SELECT id from users WHERE email = $1
-      )
-
-      `,
-      [user.email]
-    );
-    const orders = ordersResult.rows;
-    return orders;
-  }
-
-  static async createOrder(user, order) {
-    // inserting new order into orders table
-    const orderResult = await db.query(
-      `
-
-      INSERT INTO orders (
-        customer_id
-      )
-      VALUES (
-        SELECT id from users WHERE email = $1
-      )
-      RETURNING id
-
-      `,
+        
+        INSERT INTO orders (customer_id)
+        VALUES((SELECT id FROM users WHERE email = $1))
+        RETURNING id,
+                  customer_id,
+                  created_at;
+        `,
       [user.email]
     );
 
-    const orderId = orderResult.rows[0];
+    var orderId = result.rows[0].id;
 
-    // add all products into the order_details db with the right orderId
-    order.forEach((product) => {
-      db.query(
+    order.forEach((element) => {
+      const result = db.query(
         `
-      
-        INSERT INTO order_details (
-          order_id,
-          product_id,
-          quantity
-        )
-        VALUES ($1, $2, $3)
-
-      `,
-        [orderId.id, product.id, product.quantity]
+            INSERT INTO order_details (order_id, product_id, quantity)
+            VALUES($1,$2,$3)
+            RETURNING order_id,
+                      product_id,
+                      quantity;
+            `,
+        [orderId, element.id, element.quantity]
       );
     });
+
+    return result.rows;
+  }
+
+  static async listOrdersForUser(user) {
+    const result = await db.query(
+      ` SELECT orders.id AS "orderId",
+                           orders.customer_id AS "customerId",
+                           order_details.quantity AS "quantity",
+                           products.name AS "name",
+                           products.price AS "price"
+                    FROM orders
+                        JOIN order_details ON orders.id = order_details.order_id
+                        JOIN products ON products.id = order_details.product_id
+                    WHERE customer_id = (SELECT id FROM users WHERE id = $1);
+    
+    `,
+      [user.id]
+    );
+
+    //  console.log(user.id)
+    // console.log(result.rows)
+
+    return result.rows;
   }
 }
 
