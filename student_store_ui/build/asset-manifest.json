@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7de76a39.chunk.css",
+    "main.js": "/static/js/main.2e914195.chunk.js",
+    "main.js.map": "/static/js/main.2e914195.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.8a56750b.js",
+    "runtime-main.js.map": "/static/js/runtime-main.8a56750b.js.map",
+    "static/js/2.665d20db.chunk.js": "/static/js/2.665d20db.chunk.js",
+    "static/js/2.665d20db.chunk.js.map": "/static/js/2.665d20db.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.7de76a39.chunk.css.map": "/static/css/main.7de76a39.chunk.css.map",
+    "static/js/2.665d20db.chunk.js.LICENSE.txt": "/static/js/2.665d20db.chunk.js.LICENSE.txt",
+    "static/media/american_express.a07c712d.svg": "/static/media/american_express.a07c712d.svg",
+    "static/media/app_store.218b9d88.svg": "/static/media/app_store.218b9d88.svg",
+    "static/media/codepath.70a9a31f.svg": "/static/media/codepath.70a9a31f.svg",
+    "static/media/giant_codepath.ce489369.svg": "/static/media/giant_codepath.ce489369.svg",
+    "static/media/google_play.307832ee.svg": "/static/media/google_play.307832ee.svg",
+    "static/media/happy_person.3d930fc7.svg": "/static/media/happy_person.3d930fc7.svg",
+    "static/media/mastercard.10d0e111.svg": "/static/media/mastercard.10d0e111.svg",
+    "static/media/paypal.65a5b39d.svg": "/static/media/paypal.65a5b39d.svg",
+    "static/media/person.090cb572.svg": "/static/media/person.090cb572.svg",
+    "static/media/phone.f9dcbab5.svg": "/static/media/phone.f9dcbab5.svg",
+    "static/media/visa.f3719e26.svg": "/static/media/visa.f3719e26.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8a56750b.js",
+    "static/js/2.665d20db.chunk.js",
+    "static/css/main.7de76a39.chunk.css",
+    "static/js/main.2e914195.chunk.js"
+  ]
+}
